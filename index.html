@@ -42,14 +42,14 @@
 <script type="text/paperscript" canvas="canvas">
   var text = new PointText(new Point(600, 120));
   text.justification = 'center';
-  text.fillColor = 'white';
+  text.fillColor = 'red';
   text.content = 'Happy Diwali';
   text.fontSize = 60;
 
   function onFrame(event) {
     // Each frame, change the fill color of the path slightly by
     // adding 1 to its hue:
-    path.fillColor.hue += 1;
+    text.fillColor.hue += 1;
   }
   
 
@@ -171,7 +171,7 @@
 
       var startPoint = new Point(view.size.width * Math.random(), view.size.height),
           angle = randomRange(240,301),
-          length = view.size.height * 0.5,
+          length = view.size.height * 0.1*randomRange(5,7),
           size = randomRange(64, 200),
           color = getRandomColor();
 
