@@ -169,9 +169,9 @@
   function createFirework() {
       var tl = new TimelineMax();
 
-      var startPoint = new Point(view.size.width * Math.random(), view.size.height),
+      var startPoint = new Point(view.size.width * Math.random(), view.size.height*0.8),
           angle = randomRange(240,301),
-          length = view.size.height * 0.1*randomRange(5,7),
+          length = view.size.height * 0.1*randomRange(4,6),
           size = randomRange(64, 200),
           color = getRandomColor();
 
