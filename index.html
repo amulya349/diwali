@@ -22,28 +22,9 @@
     window.ontouchstart = function(){};
     }
     </script>
-  </head>
-  <body>
-    <canvas id="canvas"></canvas>
-    <!--<img src="pic3.jpg" style="top:0; left:0; position: absolute; width: 100%; height:100%;z-index: -1; overflow:hidden" id="city"> -->
-    <div style="background:url(pic3.jpg) repeat-x;position:absolute;left:0;bottom:0;width:100%;height:200px; z-index: -1"></div>
-    <p style="position:absolute; bottom:0; right:0; color:white">@Made with Love... Amulya and Ashish</p>
-    <!-- I wrote the code in paperscript, but could not find a way to use in codepen, so the js code is up here. -->
-    <script type="text/paperscript" canvas="canvas">
-    var text = new PointText(new Point(600, 120));
-    text.justification = 'center';
-    text.fillColor = 'red';
-    text.content = 'Happy and Safe Diwali';
-    text.fontSize = 60;
-    function onFrame(event) {
-    // Each frame, change the fill color of the path slightly by
-    // adding 1 to its hue:
-    text.fillColor.hue += 1;
-    }
-    // Params
-
-var param1var = getQueryVariable("name");
-  var wish;
+    <script type="text/javascript">
+      var param1var = getQueryVariable("name");
+      var wish;
       function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -64,13 +45,39 @@ var param1var = getQueryVariable("name");
         
         console.log('Query Variable ' + variable + ' not found');
       }
+    </script>
+  </head>
+  <body>
+    <h2 style = "color:white; fontFamily:corben">Happy and Safe Diwali</h2>
+    <canvas id="canvas"></canvas>
+    <!--<img src="pic3.jpg" style="top:0; left:0; position: absolute; width: 100%; height:100%;z-index: -1; overflow:hidden" id="city"> -->
+    <div style="background:url(pic3.jpg) repeat-x;position:absolute;left:0;bottom:0;width:100%;height:200px; z-index: -1"></div>
+    <p style="position:absolute; bottom:0; right:0; color:white">@Made with Love... Amulya and Ashish</p>
+    <!-- I wrote the code in paperscript, but could not find a way to use in codepen, so the js code is up here. -->
+    <script type="text/paperscript" canvas="canvas">
+    /*var text = new PointText(new Point(600, 120));
+    text.justification = 'center';
+    text.fillColor = 'red';
+    text.content = 'Happy and Safe Diwali';
+    text.fontSize = 60;
+    text.fontFamily = "corben";
+    function onFrame(event) {
+    // Each frame, change the fill color of the path slightly by
+    // adding 1 to its hue:
+    text.fillColor.hue += 1;
+    }
+    */
+    // Params
+
+
 
     // End params
+    /*
     var t = new PointText(new Point(400, 220));
     t.fillColor = 'white';
     t.content = wish;
     t.fontSize = 50;
-
+*/
     function Hex(position, targetRadius, color) {
     var subs = 3;
     this.radius = targetRadius;
