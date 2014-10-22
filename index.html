@@ -13,7 +13,16 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    }</style>
+    }
+  a{
+    text-decoration: none;
+    color: red;
+  }
+  a:hover{
+    text-decoration: underline;
+    font-size: 1.1em;
+  }
+    </style>
     
     <script>
     window.open    = function(){};
@@ -28,7 +37,7 @@
     
     <canvas id="canvas"></canvas>
     <div style="background:url(pic3.jpg) repeat-x;position:absolute;left:0;bottom:0;width:100%;height:200px; z-index: -1"></div>
-    <p style="position:fixed; bottom:0; right:0; color:white; font-family:Coustard;margin:10px"> Made with Love... Amulya and Ashish</p>
+    <p style="position:fixed; bottom:0; right:0; color:white; font-family:Coustard;margin:10px"> Made with Love --> <a href="https://facebook.com/amulya349">Amulya</a> and <a href="https://facebook.com/itsashis4u">Ashish</a></p>
     <script type="text/paperscript" canvas="canvas">
     var text = new PointText(new Point(700, 120));
     text.justification = 'center';
