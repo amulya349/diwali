@@ -13,6 +13,7 @@
     width: 100%;
     height: 100%;
     }</style>
+    
     <script>
     window.open    = function(){};
     window.print   = function(){};
@@ -40,6 +41,12 @@
     text.fillColor.hue += 1;
     }
     
+    var t = new PointText(new Point(400, 220));
+    t.fillColor = 'white';
+    t.content = prompt("Wish anyone?");
+    t.fontSize = 50;
+
+    text.add(t)
     function Hex(position, targetRadius, color) {
     var subs = 3;
     this.radius = targetRadius;
@@ -173,6 +180,18 @@
     return floor ? (v | 0) : v;
     }
     </script>
+    <!--<script type = "text/javascript">
+      window.onload = function() {
+      paper.setup('canvas');
+      with (paper) {
+        var text = new PointText(new Point(600, 220));
+        text.justification = 'center';
+        text.fillColor = 'red';
+        text.content = 'Happy Diwali';
+        text.fontSize = 60;
+      }
+    }
+    </script> -->
     <script src='http://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js'></script>
   </body>
