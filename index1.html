@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <!--
+Copyright (c) 2014 by Amulya Kumar Sahoo (http://codepen.io/amulya349/pen/kobxj)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+  <title>Digital Fireworks - CodePen</title>
+
+  <style>body {
+    background-color: #000000;
+    margin: 0;
+}
+
+#canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}</style>
+
+  <script>
+    window.open    = function(){};
+    window.print   = function(){};
+    // Support hover state for mobile.
+    if (false) {
+      window.ontouchstart = function(){};
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <canvas id="canvas"></canvas>
+  <!--<img src="pic3.jpg" style="top:0; left:0; position: absolute; width: 100%; height:100%;z-index: -1; overflow:hidden" id="city"> -->
+  <div style="background:url(pic3.jpg) repeat-x;position:absolute;left:0;bottom:0;width:100%;height:200px; z-index: -1"></div>
+  <p style="position:absolute; bottom:0; right:0; color:white">@Made with Love... Amulya and Ashish</p>
+
+<!-- I wrote the code in paperscript, but could not find a way to use in codepen, so the js code is up here. -->
+
+<script type="text/paperscript" canvas="canvas">
+  var text = new PointText(new Point(600, 120));
+  text.justification = 'center';
+  text.fillColor = 'white';
+  text.content = 'Happy Diwali';
+  text.fontSize = 60;
+
+  function onFrame(event) {
+  // Each frame, change the fill color of the path slightly by
+  // adding 1 to its hue:
+  path.fillColor.hue += 1;
+}
+  ////////////
+  // CLASSES
+  ////////////
+  function Hex(position, targetRadius, color) {
+      var subs = 3;
+
+      this.radius = targetRadius;
+      this.sides = randomIndex([30]);
+      this.targetHex = new Path.RegularPolygon(position, this.sides, targetRadius);
+      this.paths = [];
+
+      for (var i = 0; i < subs; i++) {
+          var h = new Path.RegularPolygon(position, this.sides, 0);
+
+          if (i === 0) {
+              h.strokeColor = color;
+          }
+          else {
+              h.strokeColor = new Color({
+                  hue:color.hue,
+                  saturation:color.saturation,
+                  lightness:randomRange(0.4, 0.6),
+                  alpha:1
+              });
+          }
+
+          h.strokeWidth = 24;
+          h.shadowBlur = 64;
+          h.shadowColor = h.strokeColor;
+
+          this.paths.push(h);
+      }
+
+      this.color = this.paths[subs - 1].strokeColor;
+
+      this.speed = 125;
+  }
+  Hex.prototype = {
+      animate:function() {
+          var tl = new TimelineMax({
+              onComplete:function() {
+                  this.paths.forEach(function(p) {
+                      p.remove();
+                  });
+              },
+              onCompleteScope:this
+          });
+
+          var duration = this.radius / this.speed,
+              offset = 0,
+              ease = Cubic.easeOut;
+
+          this.paths.forEach(function(h) {
+              var from, to;
+
+              for (var i = 0; i < h.segments.length; i++) {
+                  from = h.segments[i].point;
+                  to = this.targetHex.segments[i].point;
+
+                  tl.to(from, duration, {x:to.x, y:to.y, ease:ease}, offset);
+                  tl.to(h, duration, {strokeWidth:0, ease:ease}, offset);
+              }
+
+              offset += 0.2;
+
+          }, this);
+
+          return tl;
+      }
+  };
+
+  function Line(start, angle, length, color) {
+      this.start = start;
+      this.end = new Point();
+
+      this.end.setAngle(angle);
+      this.end.setLength(length);
+      this.end += this.start;
+
+      this.path = new Path();
+      this.path.add(this.start, this.end);
+      this.color = this.path.strokeColor = color;
+      this.path.visible = false;
+      this.path.strokeWidth = 2;
+      this.path.strokeCap = 'round';
+      this.path.shadowBlur = 32;
+      this.path.shadowColor = this.color;
+
+      this.speed = 250;
+  }
+  Line.prototype = {
+      animate:function() {
+          var tl = new TimelineMax({
+              onStart:function() {
+                  this.path.visible = true;
+              },
+              onStartScope:this,
+              onComplete:function() {
+                  this.path.remove();
+              },
+              onCompleteScope:this
+          });
+
+          var start = this.path.segments[0].point,
+              end = this.path.segments[1].point;
+
+          var duration = this.path.length / this.speed,
+              ease = Cubic;
+
+          tl.from(end, duration, {x:start.x, y:start.y, ease:ease.easeInOut});
+          tl.to(start, duration * 0.75, {x:end.x, y:end.y, ease:ease.easeOut}, '-=0.5');
+
+          return tl;
+      }
+  };
+
+  function createFirework() {
+      var tl = new TimelineMax();
+
+      var startPoint = new Point(view.size.width * Math.random(), view.size.height),
+          angle = randomRange(240,301),
+          length = view.size.height * 0.5,
+          size = randomRange(64, 200),
+          color = getRandomColor();
+
+      var trail = new Line(startPoint, angle, length, color),
+          hex = new Hex(trail.end, size, color);
+
+      tl.add(trail.animate());
+      tl.add('trailDone');
+
+      tl.add(hex.animate(), 'trailDone');
+
+      for (var i = 0; i < hex.sides; i++) {
+
+          var point = hex.targetHex.segments[i].point,
+              localPoint = point - hex.targetHex.position;
+
+          var spark = new Line(trail.end, localPoint.angle, size * 2, color);
+
+          tl.add(spark.animate(), 'trailDone');
+      }
+
+      return tl;
+  }
+
+  ////////////
+  // UPDATE
+  ////////////
+
+  function onFrame(e) {
+      if (e.count % 60 === 0) {
+          createFirework();
+      }
+  }
+
+  ////////////
+  // utils
+  ////////////
+
+  function getRandomColor() {
+      return new Color({
+          hue:randomRange(0, 100),
+          saturation:0.75,
+          lightness:0.5
+      })
+  }
+
+  function randomIndex(arr) {
+      return arr[randomRange(0, arr.length, true)];
+  }
+
+  function randomRange(min, max, floor) {
+      var v = min + Math.random() * (max - min);
+      floor = floor || false;
+      return floor ? (v | 0) : v;
+  }
+</script>
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js'></script><script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js'></script>
+
+  <script src='/assets/common/localstorage.js'></script>
+  <script src='/assets/post/scroll/remember_scroll.js'></script>
+  <script>RememberScroll.init();</script>
+
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage('resize', "*");
+    }
+  </script>
+
+</body>
+
+</html>
