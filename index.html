@@ -35,12 +35,12 @@
     <p style="position:absolute; bottom:0; right:0; color:white">@Made with Love... Amulya and Ashish</p>
     <!-- I wrote the code in paperscript, but could not find a way to use in codepen, so the js code is up here. -->
     <script type="text/paperscript" canvas="canvas">
-    var text = new PointText(new Point(600, 120));
+    var text = new PointText(new Point(700, 120));
     text.justification = 'center';
     text.fillColor = 'red';
     text.content = 'Happy and Safe Diwali';
     text.fontSize = 60;
-    text.fontFamily = "corben";
+    text.fontFamily = "Coustard";
     function onFrame(event) {
     // Each frame, change the fill color of the path slightly by
     // adding 1 to its hue:
@@ -74,10 +74,12 @@
 
     // End params
     
-    var t = new PointText(new Point(400, 220));
+    var t = new PointText(new Point(700, 220));
+    t.justification = 'center';
     t.fillColor = 'white';
     t.content = wish;
     t.fontSize = 50;
+    t.fontFamily = "Coustard";
 
     function Hex(position, targetRadius, color) {
     var subs = 3;
@@ -212,18 +214,7 @@
     return floor ? (v | 0) : v;
     }
     </script>
-    <!--<script type = "text/javascript">
-      window.onload = function() {
-      paper.setup('canvas');
-      with (paper) {
-        var text = new PointText(new Point(600, 220));
-        text.justification = 'center';
-        text.fillColor = 'red';
-        text.content = 'Happy Diwali';
-        text.fontSize = 60;
-      }
-    }
-    </script> -->
+    
     <script src='http://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js'></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js'></script>
   </body>
