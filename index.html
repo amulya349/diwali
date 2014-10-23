@@ -30,7 +30,7 @@ Created By: Amulya Kumar Sahoo, http://facebook.com/amulya349
     <title>Diwali Greetings from IIITians !</title>
     <link href='http://fonts.googleapis.com/css?family=Coustard:400,900' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <style>
     body {
@@ -68,9 +68,9 @@ Created By: Amulya Kumar Sahoo, http://facebook.com/amulya349
     <p style="position:fixed; bottom:0; right:0; color:white; font-family:Coustard;margin:10px"> Made with Love --> <a href="https://facebook.com/amulya349" target="_blank">Amulya</a> and <a href="https://facebook.com/itsashis4u" target="_blank">Ashish</a></p>
     <script type="text/paperscript" canvas="canvas">
 
-    //var browserWidth = 600;
+    var browserWidth = 0.5* document.documentElement.clientWidth;
     //alert(browserWidth);
-    var text = new PointText(new Point(600, 120));
+    var text = new PointText(new Point(browserWidth, 120));
     text.justification = 'center';
     text.fillColor = 'red';
     text.content = 'Happy and Safe Diwali';
@@ -94,7 +94,7 @@ Created By: Amulya Kumar Sahoo, http://facebook.com/amulya349
         console.log('Query Variable ' + variable + ' not found');
       }
 
-    var t = new PointText(new Point(600, 220));
+    var t = new PointText(new Point(browserWidth, 220));
     t.justification = 'center';
     t.fillColor = 'white';
     t.content = wish;
