@@ -67,7 +67,10 @@ Created By: Amulya Kumar Sahoo, http://facebook.com/amulya349
     <div style="background:url(pic3.jpg) repeat-x;position:absolute;left:0;bottom:0;width:100%;height:200px; z-index: -1"></div>
     <p style="position:fixed; bottom:0; right:0; color:white; font-family:Coustard;margin:10px"> Made with Love --> <a href="https://facebook.com/amulya349" target="_blank">Amulya</a> and <a href="https://facebook.com/itsashis4u" target="_blank">Ashish</a></p>
     <script type="text/paperscript" canvas="canvas">
-    var text = new PointText(new Point(700, 120));
+
+    //var browserWidth = 600;
+    //alert(browserWidth);
+    var text = new PointText(new Point(600, 120));
     text.justification = 'center';
     text.fillColor = 'red';
     text.content = 'Happy and Safe Diwali';
@@ -84,14 +87,14 @@ Created By: Amulya Kumar Sahoo, http://facebook.com/amulya349
         var pair = vars[i].split("=");
         if (pair[0] == variable) {
           console.log(pair[1]);
-          wish = decodeURIComponent(pair[1]); }
+          wish = decodeURIComponent(pair[1].split('+').join('%20')); }
         else if(pair[1]=""){wish = "To You !"}
         else{wish = "To You !"}
         } 
         console.log('Query Variable ' + variable + ' not found');
       }
 
-    var t = new PointText(new Point(700, 220));
+    var t = new PointText(new Point(600, 220));
     t.justification = 'center';
     t.fillColor = 'white';
     t.content = wish;
@@ -242,6 +245,7 @@ Created By: Amulya Kumar Sahoo, http://facebook.com/amulya349
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-37707141-4', 'auto');
+      ga('require', 'displayfeatures');
       ga('send', 'pageview');
 
   </script>
