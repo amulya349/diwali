@@ -1,0 +1,25 @@
+{
+  "name": "diwali",
+  "version": "1.0.0",
+  "description": "Celebrate Happy Diwali",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amulya349/diwali.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amulya349/diwali/issues"
+  },
+  "homepage": "https://github.com/amulya349/diwali#readme", 
+  "dependencies": {
+    "ejs": "~0.8.5",
+    "express": "^4.9.8",
+    "forever": "^0.13.0",
+    "mongoose": "~3.8.20"
+  }
+}
