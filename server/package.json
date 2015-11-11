@@ -17,12 +17,9 @@
   },
   "homepage": "https://github.com/amulya349/diwali#readme", 
   "dependencies": {
-    "ejs": "@latest",
-    "express": "@latest",
-    "forever": "@latest",
-    "mongoose": "@latest"
-  },
-  "engines": {
-    "node": "4.2.2"
+    "ejs": "~0.8.5",
+    "express": "^4.9.8",
+    "forever": "^0.13.0",
+    "mongoose": "~3.8.20"
   }
 }
